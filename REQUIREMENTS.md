@@ -11,6 +11,5 @@ Completing these functional requirements will define a successful project.
 
 # Non-goals
 - No real radar equations/signal processing
-- No UI beyond console/logs
 - No machine learning classification
 - No real-time/threading guarantees
