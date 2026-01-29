@@ -86,17 +86,49 @@ CMakeFiles/sensor_system.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sensor_system.dir/src/main.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/hassanalvi/Desktop/SDDP project/sensor-data-decision-pipeline/src/main.cpp" -o CMakeFiles/sensor_system.dir/src/main.cpp.s
 
+CMakeFiles/sensor_system.dir/src/model.cpp.o: CMakeFiles/sensor_system.dir/flags.make
+CMakeFiles/sensor_system.dir/src/model.cpp.o: /Users/hassanalvi/Desktop/SDDP\ project/sensor-data-decision-pipeline/src/model.cpp
+CMakeFiles/sensor_system.dir/src/model.cpp.o: CMakeFiles/sensor_system.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/Users/hassanalvi/Desktop/SDDP project/sensor-data-decision-pipeline/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/sensor_system.dir/src/model.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sensor_system.dir/src/model.cpp.o -MF CMakeFiles/sensor_system.dir/src/model.cpp.o.d -o CMakeFiles/sensor_system.dir/src/model.cpp.o -c "/Users/hassanalvi/Desktop/SDDP project/sensor-data-decision-pipeline/src/model.cpp"
+
+CMakeFiles/sensor_system.dir/src/model.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/sensor_system.dir/src/model.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/hassanalvi/Desktop/SDDP project/sensor-data-decision-pipeline/src/model.cpp" > CMakeFiles/sensor_system.dir/src/model.cpp.i
+
+CMakeFiles/sensor_system.dir/src/model.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sensor_system.dir/src/model.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/hassanalvi/Desktop/SDDP project/sensor-data-decision-pipeline/src/model.cpp" -o CMakeFiles/sensor_system.dir/src/model.cpp.s
+
+CMakeFiles/sensor_system.dir/src/scenario_loader.cpp.o: CMakeFiles/sensor_system.dir/flags.make
+CMakeFiles/sensor_system.dir/src/scenario_loader.cpp.o: /Users/hassanalvi/Desktop/SDDP\ project/sensor-data-decision-pipeline/src/scenario_loader.cpp
+CMakeFiles/sensor_system.dir/src/scenario_loader.cpp.o: CMakeFiles/sensor_system.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="/Users/hassanalvi/Desktop/SDDP project/sensor-data-decision-pipeline/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/sensor_system.dir/src/scenario_loader.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/sensor_system.dir/src/scenario_loader.cpp.o -MF CMakeFiles/sensor_system.dir/src/scenario_loader.cpp.o.d -o CMakeFiles/sensor_system.dir/src/scenario_loader.cpp.o -c "/Users/hassanalvi/Desktop/SDDP project/sensor-data-decision-pipeline/src/scenario_loader.cpp"
+
+CMakeFiles/sensor_system.dir/src/scenario_loader.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/sensor_system.dir/src/scenario_loader.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "/Users/hassanalvi/Desktop/SDDP project/sensor-data-decision-pipeline/src/scenario_loader.cpp" > CMakeFiles/sensor_system.dir/src/scenario_loader.cpp.i
+
+CMakeFiles/sensor_system.dir/src/scenario_loader.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/sensor_system.dir/src/scenario_loader.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "/Users/hassanalvi/Desktop/SDDP project/sensor-data-decision-pipeline/src/scenario_loader.cpp" -o CMakeFiles/sensor_system.dir/src/scenario_loader.cpp.s
+
 # Object files for target sensor_system
 sensor_system_OBJECTS = \
-"CMakeFiles/sensor_system.dir/src/main.cpp.o"
+"CMakeFiles/sensor_system.dir/src/main.cpp.o" \
+"CMakeFiles/sensor_system.dir/src/model.cpp.o" \
+"CMakeFiles/sensor_system.dir/src/scenario_loader.cpp.o"
 
 # External object files for target sensor_system
 sensor_system_EXTERNAL_OBJECTS =
 
 sensor_system: CMakeFiles/sensor_system.dir/src/main.cpp.o
+sensor_system: CMakeFiles/sensor_system.dir/src/model.cpp.o
+sensor_system: CMakeFiles/sensor_system.dir/src/scenario_loader.cpp.o
 sensor_system: CMakeFiles/sensor_system.dir/build.make
 sensor_system: CMakeFiles/sensor_system.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="/Users/hassanalvi/Desktop/SDDP project/sensor-data-decision-pipeline/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable sensor_system"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="/Users/hassanalvi/Desktop/SDDP project/sensor-data-decision-pipeline/build/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable sensor_system"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/sensor_system.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

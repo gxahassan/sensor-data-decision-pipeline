@@ -153,6 +153,54 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sensor_system.dir/build.make CMakeFiles/sensor_system.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/model.o: src/model.cpp.o
+.PHONY : src/model.o
+
+# target to build an object file
+src/model.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sensor_system.dir/build.make CMakeFiles/sensor_system.dir/src/model.cpp.o
+.PHONY : src/model.cpp.o
+
+src/model.i: src/model.cpp.i
+.PHONY : src/model.i
+
+# target to preprocess a source file
+src/model.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sensor_system.dir/build.make CMakeFiles/sensor_system.dir/src/model.cpp.i
+.PHONY : src/model.cpp.i
+
+src/model.s: src/model.cpp.s
+.PHONY : src/model.s
+
+# target to generate assembly for a file
+src/model.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sensor_system.dir/build.make CMakeFiles/sensor_system.dir/src/model.cpp.s
+.PHONY : src/model.cpp.s
+
+src/scenario_loader.o: src/scenario_loader.cpp.o
+.PHONY : src/scenario_loader.o
+
+# target to build an object file
+src/scenario_loader.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sensor_system.dir/build.make CMakeFiles/sensor_system.dir/src/scenario_loader.cpp.o
+.PHONY : src/scenario_loader.cpp.o
+
+src/scenario_loader.i: src/scenario_loader.cpp.i
+.PHONY : src/scenario_loader.i
+
+# target to preprocess a source file
+src/scenario_loader.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sensor_system.dir/build.make CMakeFiles/sensor_system.dir/src/scenario_loader.cpp.i
+.PHONY : src/scenario_loader.cpp.i
+
+src/scenario_loader.s: src/scenario_loader.cpp.s
+.PHONY : src/scenario_loader.s
+
+# target to generate assembly for a file
+src/scenario_loader.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sensor_system.dir/build.make CMakeFiles/sensor_system.dir/src/scenario_loader.cpp.s
+.PHONY : src/scenario_loader.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -165,6 +213,12 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/model.o"
+	@echo "... src/model.i"
+	@echo "... src/model.s"
+	@echo "... src/scenario_loader.o"
+	@echo "... src/scenario_loader.i"
+	@echo "... src/scenario_loader.s"
 .PHONY : help
 
 
