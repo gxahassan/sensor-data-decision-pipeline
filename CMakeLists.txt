@@ -11,4 +11,5 @@ add_executable(sensor_system
     src/main.cpp
     src/model.cpp
     src/scenario_loader.cpp
+    src/validator.cpp
 )
