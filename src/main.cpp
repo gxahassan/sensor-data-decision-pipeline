@@ -3,6 +3,7 @@
 #include "model.hpp"
 #include "scenario_loader.hpp"
 #include "validator.hpp"
+#include "track_manager.hpp"
 
 int main() {
     std::cout << "==============================================\n";
@@ -10,6 +11,7 @@ int main() {
     std::cout << "==============================================\n\n";
     
     Validator validator;
+    TrackManager track_manager;
     
     ScenarioLoader loader("../scenarios/demo.csv");
     if (!loader.load()) {
@@ -37,10 +39,12 @@ int main() {
         std::cout << "Timestep " << timestep << ":\n";
         std::cout << "  " << frame.size() << " measurement(s)\n";
         
+        std::vector<DataQuality> qualities;
         int valid = 0, degraded = 0, rejected = 0;
         
         for (const auto& m : frame) {
             DataQuality quality = validator.assess(m);
+            qualities.push_back(quality);
             
             std::cout << "    Track " << m.track_id 
                       << " at (" << m.x << ", " << m.y << ")"
@@ -52,12 +56,29 @@ int main() {
             else rejected++;
         }
         
-        std::cout << "  Summary: VALID=" << valid 
+        std::cout << "  Validation: VALID=" << valid 
                   << " DEGRADED=" << degraded 
-                  << " REJECTED=" << rejected << "\n\n";
+                  << " REJECTED=" << rejected << "\n";
+        
+        track_manager.processFrame(timestep, frame, qualities);
+        
+        std::cout << "  Active tracks:\n";
+        for (const auto& [id, track] : track_manager.getActiveTracks()) {
+            std::cout << "    Track " << id 
+                      << " state=" << trackStateToString(track.getState())
+                      << " last_seen=" << track.getLastSeenTime()
+                      << " detections=" << track.getTimesSeenConfirmed()
+                      << " missed=" << track.getMissedUpdates() << "\n";
+        }
+        
+        for (int id : track_manager.getDroppedIds()) {
+            std::cout << "    Track " << id << " → DROPPED\n";
+        }
+        
+        std::cout << "\n";
     }
     
-    std::cout << "✅ Section 3 complete - validation integrated!\n";
+    std::cout << "✅ Section 4 complete - track lifecycle management working!\n";
     
     return 0;
 }
