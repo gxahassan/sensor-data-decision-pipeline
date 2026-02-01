@@ -5,6 +5,8 @@
 #include "validator.hpp"
 #include "track_manager.hpp"
 #include "threat_evaluator.hpp"
+#include "alert_manager.hpp"
+#include "event_logger.hpp"
 
 int main() {
     std::cout << "==============================================\n";
@@ -14,6 +16,8 @@ int main() {
     Validator validator;
     TrackManager track_manager;
     ThreatEvaluator threat_evaluator;
+    AlertManager alert_manager;
+    EventLogger logger("../output/tracks.csv", "../output/alerts.csv");
     
     ScenarioLoader loader("../scenarios/demo.csv");
     if (!loader.load()) {
@@ -69,7 +73,17 @@ int main() {
             track.setThreatLevel(threat);
         }
         
-        std::cout << "  Active tracks:\n";
+        auto alert_events = alert_manager.processAlerts(timestep, 
+                                                        track_manager.getActiveTracks(),
+                                                        track_manager.getDroppedIds());
+                for (const auto& [id, track] : track_manager.getActiveTracks()) {
+            logger.logTrack(timestep, track);
+        }
+        
+        for (const auto& event : alert_events) {
+            logger.logAlert(event);
+        }
+                std::cout << "  Active tracks:\n";
         for (const auto& [id, track] : track_manager.getActiveTracks()) {
             std::cout << "    Track " << id 
                       << " state=" << trackStateToString(track.getState())
@@ -82,10 +96,31 @@ int main() {
             std::cout << "    Track " << id << " → DROPPED\n";
         }
         
+        if (!alert_events.empty()) {
+            std::cout << "  Alerts:\n";
+            for (const auto& event : alert_events) {
+                if (event.type == AlertEvent::RAISED) {
+                    std::cout << "    RAISED: Track " << event.track_id 
+                              << " " << threatLevelToString(event.threat_level)
+                              << " (" << event.reason << ")\n";
+                } else {
+                    std::cout << "    CLEARED: Track " << event.track_id 
+                              << " (" << event.reason << ")\n";
+                }
+            }
+        } else if (!alert_manager.getActiveAlerts().empty()) {
+            std::cout << "  Alerts: " << alert_manager.getActiveAlerts().size() << " active\n";
+        } else {
+            std::cout << "  Alerts: none\n";
+        }
+        
         std::cout << "\n";
     }
     
-    std::cout << "✅ Section 5 complete - threat evaluation working!\n";
+    logger.flush();
+    
+    std::cout << "✅ Section 7 complete - event logging working!\n";
+    std::cout << "   Logs written to: output/tracks.csv and output/alerts.csv\n";
     
     return 0;
 }

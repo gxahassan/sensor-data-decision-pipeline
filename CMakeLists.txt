@@ -14,4 +14,6 @@ add_executable(sensor_system
     src/validator.cpp
     src/track_manager.cpp
     src/threat_evaluator.cpp
+    src/alert_manager.cpp
+    src/event_logger.cpp
 )
