@@ -13,4 +13,5 @@ add_executable(sensor_system
     src/scenario_loader.cpp
     src/validator.cpp
     src/track_manager.cpp
+    src/threat_evaluator.cpp
 )

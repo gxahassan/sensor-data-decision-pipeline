@@ -27,9 +27,9 @@ void TrackManager::updateTrack(int timestep, const Measurement& m, DataQuality q
     auto it = tracks_.find(m.track_id);
     
     if (it == tracks_.end()) {
-        tracks_.emplace(m.track_id, Track(m.track_id, m.x, m.y, timestep));
+        tracks_.emplace(m.track_id, Track(m.track_id, m.x, m.y, timestep, m.speed));
     } else {
-        it->second.update(m.x, m.y, timestep, quality);
+        it->second.update(m.x, m.y, timestep, quality, m.speed);
     }
     
     updated_this_frame_.insert(m.track_id);

@@ -32,10 +32,11 @@ Measurement::Measurement(int t, int id, double x_pos, double y_pos, double spd)
     : timestep(t), track_id(id), x(x_pos), y(y_pos), speed(spd) {
 }
 
-Track::Track(int id, double x, double y, int timestep)
+Track::Track(int id, double x, double y, int timestep, double speed)
     : id_(id),
       x_(x),
       y_(y),
+      speed_(speed),
       last_seen_(timestep),
       times_seen_(1),
       missed_updates_(0),
@@ -44,9 +45,10 @@ Track::Track(int id, double x, double y, int timestep)
       last_quality_(DataQuality::VALID) {
 }
 
-void Track::update(double x, double y, int timestep, DataQuality quality) {
+void Track::update(double x, double y, int timestep, DataQuality quality, double speed) {
     x_ = x;
     y_ = y;
+    speed_ = speed;
     last_seen_ = timestep;
     last_quality_ = quality;
     missed_updates_ = 0;

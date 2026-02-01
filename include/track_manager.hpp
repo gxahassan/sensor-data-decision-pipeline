@@ -14,6 +14,7 @@ public:
                       const std::vector<DataQuality>& qualities);
     
     const std::map<int, Track>& getActiveTracks() const { return tracks_; }
+    std::map<int, Track>& getActiveTracksMutable() { return tracks_; }
     const std::set<int>& getUpdatedIds() const { return updated_this_frame_; }
     const std::set<int>& getDroppedIds() const { return dropped_this_frame_; }
     

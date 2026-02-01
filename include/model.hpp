@@ -39,13 +39,14 @@ struct Measurement {
 
 class Track {
 public:
-    Track(int id, double x, double y, int timestep);
-    void update(double x, double y, int timestep, DataQuality quality);
+    Track(int id, double x, double y, int timestep, double speed = 0.0);
+    void update(double x, double y, int timestep, DataQuality quality, double speed);
     void markCoasting();
     
     int getId() const { return id_; }
     double getX() const { return x_; }
     double getY() const { return y_; }
+    double getSpeed() const { return speed_; }
     int getLastSeenTime() const { return last_seen_; }
     int getTimesSeenConfirmed() const { return times_seen_; }
     int getMissedUpdates() const { return missed_updates_; }
@@ -60,6 +61,7 @@ private:
     int id_;
     double x_;
     double y_;
+    double speed_;
     int last_seen_;
     int times_seen_;
     int missed_updates_;

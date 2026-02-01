@@ -4,6 +4,7 @@
 #include "scenario_loader.hpp"
 #include "validator.hpp"
 #include "track_manager.hpp"
+#include "threat_evaluator.hpp"
 
 int main() {
     std::cout << "==============================================\n";
@@ -12,6 +13,7 @@ int main() {
     
     Validator validator;
     TrackManager track_manager;
+    ThreatEvaluator threat_evaluator;
     
     ScenarioLoader loader("../scenarios/demo.csv");
     if (!loader.load()) {
@@ -62,13 +64,18 @@ int main() {
         
         track_manager.processFrame(timestep, frame, qualities);
         
+        for (auto& [id, track] : track_manager.getActiveTracksMutable()) {
+            ThreatLevel threat = threat_evaluator.evaluate(track);
+            track.setThreatLevel(threat);
+        }
+        
         std::cout << "  Active tracks:\n";
         for (const auto& [id, track] : track_manager.getActiveTracks()) {
             std::cout << "    Track " << id 
                       << " state=" << trackStateToString(track.getState())
-                      << " last_seen=" << track.getLastSeenTime()
-                      << " detections=" << track.getTimesSeenConfirmed()
-                      << " missed=" << track.getMissedUpdates() << "\n";
+                      << " threat=" << threatLevelToString(track.getThreatLevel())
+                      << " speed=" << track.getSpeed()
+                      << " pos=(" << track.getX() << "," << track.getY() << ")\n";
         }
         
         for (int id : track_manager.getDroppedIds()) {
@@ -78,7 +85,7 @@ int main() {
         std::cout << "\n";
     }
     
-    std::cout << "✅ Section 4 complete - track lifecycle management working!\n";
+    std::cout << "✅ Section 5 complete - threat evaluation working!\n";
     
     return 0;
 }
