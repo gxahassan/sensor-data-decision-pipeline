@@ -50,7 +50,7 @@ def get_active_alerts(alerts_df, current_timestep):
     
     return active
 
-def plot_tracks(df, show_labels, auto_scale):
+def plot_tracks(df, show_labels, auto_scale, all_tracks_df, current_timestep, show_trails):
     fig, ax = plt.subplots(figsize=(8, 8))
     fig.patch.set_facecolor('black')
     ax.set_facecolor('black')
@@ -63,6 +63,17 @@ def plot_tracks(df, show_labels, auto_scale):
     ax.add_patch(warning)
     
     ax.plot(0, 0, marker='o', color='lime', markersize=10, label='Origin')
+    
+    if show_trails:
+        for track_id in df['track_id'].unique():
+            track_history = all_tracks_df[
+                (all_tracks_df['track_id'] == track_id) & 
+                (all_tracks_df['timestep'] <= current_timestep)
+            ].sort_values('timestep')
+            
+            if len(track_history) > 1:
+                ax.plot(track_history['x'], track_history['y'], 
+                       linestyle=':', linewidth=1.5, alpha=0.6, color='lightgray')
     
     threat_colors = {'LOW': 'green', 'MEDIUM': 'orange', 'HIGH': 'red'}
     state_markers = {'TENTATIVE': 'x', 'CONFIRMED': 'o', 'COASTING': '^', 'DROPPED': 's'}
@@ -82,7 +93,7 @@ def plot_tracks(df, show_labels, auto_scale):
                         ax.annotate(str(track['track_id']), 
                                   (track['x'], track['y']),
                                   xytext=(5, 5), textcoords='offset points',
-                                  fontsize=9, fontweight='bold')
+                                  fontsize=9, fontweight='bold', color='white')
     
     ax.axhline(0, color='white', linestyle='-', linewidth=0.5, alpha=0.3)
     ax.axvline(0, color='white', linestyle='-', linewidth=0.5, alpha=0.3)
@@ -93,15 +104,21 @@ def plot_tracks(df, show_labels, auto_scale):
     ax.tick_params(colors='white')
     
     if auto_scale:
-        margin = 5
-        x_min, x_max = df['x'].min() - margin, df['x'].max() + margin
-        y_min, y_max = df['y'].min() - margin, df['y'].max() + margin
-        limit = max(abs(x_min), abs(x_max), abs(y_min), abs(y_max))
-        ax.set_xlim(-limit, limit)
-        ax.set_ylim(-limit, limit)
+        if df.empty:
+            ax.set_xlim(-30, 30)
+            ax.set_ylim(-30, 30)
+        else:
+            margin = 5
+            x_min, x_max = df['x'].min() - margin, df['x'].max() + margin
+            y_min, y_max = df['y'].min() - margin, df['y'].max() + margin
+            limit = max(abs(x_min), abs(x_max), abs(y_min), abs(y_max), 15)
+            ax.set_xlim(-limit, limit)
+            ax.set_ylim(-limit, limit)
     else:
         ax.set_xlim(-30, 30)
         ax.set_ylim(-30, 30)
+    
+    ax.set_aspect('equal')
     
     legend = ax.legend(loc='upper right', fontsize=8)
     legend.get_frame().set_facecolor('black')
@@ -162,8 +179,9 @@ selected_states = st.sidebar.multiselect("Track States", all_states, default=def
 all_threats = ['LOW', 'MEDIUM', 'HIGH']
 selected_threats = st.sidebar.multiselect("Threat Levels", all_threats, default=all_threats)
 
-show_labels = st.sidebar.checkbox("Show track labels", value=True)
-auto_scale = st.sidebar.checkbox("Auto-scale plot", value=False)
+show_labels = st.sidebar.checkbox("Show track labels", value=True, key="show_labels")
+auto_scale = st.sidebar.checkbox("Auto-scale plot", value=False, key="auto_scale")
+show_trails = st.sidebar.checkbox("Show track trails", value=True, key="show_trails")
 
 current_tracks = tracks_df[tracks_df['timestep'] == current_timestep].copy()
 
@@ -189,7 +207,7 @@ with col_plot:
     if current_tracks.empty:
         st.info("No tracks match current filters.")
     else:
-        fig = plot_tracks(current_tracks, show_labels, auto_scale)
+        fig = plot_tracks(current_tracks, show_labels, auto_scale, tracks_df, current_timestep, show_trails)
         st.pyplot(fig)
         plt.close(fig)
 

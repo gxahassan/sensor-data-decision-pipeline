@@ -19,7 +19,7 @@ int main() {
     AlertManager alert_manager;
     EventLogger logger("../output/tracks.csv", "../output/alerts.csv");
     
-    ScenarioLoader loader("../scenarios/demo.csv");
+    ScenarioLoader loader("../scenarios/comprehensive.csv");
     if (!loader.load()) {
         return 1;
     }

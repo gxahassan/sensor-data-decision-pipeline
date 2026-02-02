@@ -1,7 +1,19 @@
 timestep,track_id,event_type,threat_level,reason
 0,102,RAISED,HIGH,entered protected zone
 1,101,RAISED,HIGH,high threat detected
+1,103,RAISED,HIGH,high threat detected
+1,104,RAISED,HIGH,high threat detected
 2,102,CLEARED,MEDIUM,threat reduced
+2,105,RAISED,HIGH,entered protected zone
 3,102,RAISED,HIGH,entered protected zone
 4,102,CLEARED,MEDIUM,threat reduced
+4,104,CLEARED,LOW,threat reduced
 5,102,RAISED,HIGH,entered protected zone
+5,104,RAISED,HIGH,high threat detected
+6,103,CLEARED,LOW,threat reduced
+6,104,CLEARED,LOW,threat reduced
+7,106,RAISED,HIGH,high threat detected
+7,107,RAISED,HIGH,entered protected zone
+9,105,CLEARED,LOW,threat reduced
+9,108,RAISED,HIGH,entered protected zone
+11,101,CLEARED,MEDIUM,threat reduced
